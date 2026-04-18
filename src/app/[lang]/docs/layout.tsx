@@ -9,7 +9,11 @@ export default async function Layout({
   children,
 }: LayoutProps<"/[lang]/docs">) {
   const { lang } = await params;
-  const tree = localizePageTree(source.pageTree[lang], lang, {
+  // Non-English locales fall back to the English page tree until Crowdin
+  // lands translated content. `source.pageTree[lang]` can be undefined for
+  // locales with no content dir yet.
+  const rawTree = source.pageTree[lang] ?? source.pageTree["en"];
+  const tree = localizePageTree(rawTree, lang, {
     translateName: true,
     translateTitle: true,
     translateIndex: false,

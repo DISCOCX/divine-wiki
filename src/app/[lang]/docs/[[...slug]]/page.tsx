@@ -18,7 +18,9 @@ export default async function Page(
   props: PageProps<"/[lang]/docs/[[...slug]]">,
 ) {
   const params = await props.params;
-  const page = source.getPage(params.slug, params.lang);
+  const page =
+    source.getPage(params.slug, params.lang) ??
+    source.getPage(params.slug, "en");
   if (!page) notFound();
 
   const messages = require(`@/../messages/${params.lang}.json`);
@@ -92,7 +94,9 @@ export async function generateMetadata(
   props: PageProps<"/[lang]/docs/[[...slug]]">,
 ): Promise<Metadata> {
   const params = await props.params;
-  const page = source.getPage(params.slug, params.lang);
+  const page =
+    source.getPage(params.slug, params.lang) ??
+    source.getPage(params.slug, "en");
   if (!page) notFound();
 
   const slug = params.slug || [];

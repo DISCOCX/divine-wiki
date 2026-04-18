@@ -14,6 +14,8 @@ export function localizePageTree(
     translateChildren?: boolean;
   },
 ): DocsLayoutProps["tree"] {
+  if (!tree) return tree;
+
   const {
     translateName = true,
     translateTitle = true,
