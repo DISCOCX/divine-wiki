@@ -14,7 +14,16 @@
     "tagline": "Guides, tools, and workflows from the Divine Skins creator community.",
     "ctaStart": "Start here",
     "ctaBrowse": "Browse guides",
-    "ctaContribute": "Write a guide"
+    "ctaContribute": "Write a guide",
+    "joinDiscord": "Join the Divine Discord",
+    "tracksHeading": "Pick your lane",
+    "tracksSubheading": "Three of the most-trafficked tracks in the wiki.",
+    "trackWalkthroughTitle": "Guided walkthrough",
+    "trackWalkthroughDesc": "New here? Start with the end-to-end path from blank Maya scene to a ready-to-install fantome file.",
+    "trackMayaTitle": "Maya workflow",
+    "trackMayaDesc": "Mesh swaps, rigging, weight painting, and exporting the way the Divine creators actually do it.",
+    "trackVfxTitle": "VFX & bins",
+    "trackVfxDesc": "Bin editing, particle work, and getting effects to land without crashing the game client."
   },
 
   "contribute": {

@@ -3,7 +3,6 @@ import { BookIcon, PencilIcon, MessageCircleIcon } from "lucide-react";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { i18n } from "@/lib/i18n";
 import { discordInviteUrl } from "@/lib/config";
-import DivineLogo from "@/app/icon0.svg";
 import { getMessages } from "./locale";
 
 export function baseOptions(
@@ -17,10 +16,18 @@ export function baseOptions(
     nav: {
       title: (
         <>
-          <div className="relative h-10 w-10 lg:h-8 lg:w-8">
-            <Image alt="Divine Skins" src={DivineLogo} fill />
+          <div className="relative h-9 w-9 lg:h-8 lg:w-8">
+            <Image
+              alt="Divine Skins"
+              src="/brand/logo.webp"
+              fill
+              sizes="36px"
+              priority
+            />
           </div>
-          <span className="font-medium">{messages.nav.title}</span>
+          <span className="text-base font-[var(--font-hero)] font-bold tracking-tight">
+            {messages.nav.title}
+          </span>
         </>
       ),
       url: `/${locale}/`,

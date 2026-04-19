@@ -2,19 +2,32 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import { defineI18nUI } from "fumadocs-ui/i18n";
 import { i18n } from "@/lib/i18n";
 import englishTranslations from "@/../messages/en.json";
-import { Manrope, JetBrains_Mono } from "next/font/google";
+import { Manrope, Poppins, Inter, JetBrains_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import { baseUrl } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-manrope",
+  weight: ["400", "600", "700", "800"],
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -32,6 +45,15 @@ export const metadata: Metadata = {
     "divine skins",
     "celestial launcher",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   alternates: {
     types: {
       "text/plain": [
@@ -68,9 +90,16 @@ export default async function RootLayout({
   const { lang } = await params;
 
   return (
-    <html lang={lang} dir="ltr" suppressHydrationWarning>
+    <html lang={lang} dir="ltr" className="dark" suppressHydrationWarning>
       <body>
-        <div className={cn(manrope.variable, jetbrainsMono.variable, "font-sans")}>
+        <div
+          className={cn(
+            manrope.variable,
+            poppins.variable,
+            inter.variable,
+            jetbrainsMono.variable,
+          )}
+        >
           <RootProvider i18n={provider(lang)}>{children}</RootProvider>
         </div>
       </body>

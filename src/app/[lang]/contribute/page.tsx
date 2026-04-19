@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ExternalLinkIcon } from "lucide-react";
 import ContributeClient from "./ContributeClient";
+import { LevelPill } from "@/components/mdx/LevelPill";
 import { getMessages } from "@/lib/locale";
 import type { Metadata } from "next";
 
@@ -19,26 +20,34 @@ export default async function ContributePage({
 
   return (
     <main className="mx-auto w-full max-w-[1400px] px-6 py-12">
-      <header className="mb-8 flex flex-col gap-3">
-        <h1 className="text-3xl font-bold tracking-tight">{t.title}</h1>
-        <p className="max-w-2xl text-sm text-muted-foreground">{t.subtitle}</p>
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+      <header className="mb-8 flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-divine-text text-3xl font-[var(--font-hero)] font-extrabold tracking-tight md:text-4xl">
+            <span className="divine-gradient-text">Write</span> a guide
+          </h1>
+          <LevelPill level="advanced" label="Creator surface" />
+        </div>
+        <hr className="divine-hr w-24 opacity-80" />
+        <p className="text-divine-text-muted max-w-2xl text-sm md:text-base">
+          {t.subtitle}
+        </p>
+        <div className="text-divine-text-muted flex flex-wrap items-center gap-4 text-xs">
           <Link
             href="/CONTRIBUTING.md"
-            className="inline-flex items-center gap-1 underline hover:text-foreground"
+            className="text-divine-primary-light inline-flex items-center gap-1 underline-offset-4 hover:text-white hover:underline"
           >
             {t.manualLink}
-            <ExternalLinkIcon className="size-3" />
+            <ExternalLinkIcon className="size-3" aria-hidden />
           </Link>
           <span className="opacity-50">·</span>
           <Link
             href="https://discord.gg/divineskins"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 hover:text-foreground"
+            className="hover:text-divine-primary-light inline-flex items-center gap-1"
           >
             Need help? Ask in Discord
-            <ExternalLinkIcon className="size-3" />
+            <ExternalLinkIcon className="size-3" aria-hidden />
           </Link>
         </div>
       </header>

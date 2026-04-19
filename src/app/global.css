@@ -5,18 +5,42 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Divine palette — purple primary, gold accent, deep-black backgrounds.
-   Values mirror the legacy Divine Academy `--ds-*` tokens. */
+/* Divine Skins design system — synced with prod (DivineSkinsWEB-PROD/tailwind.config.js).
+   Three-tier dark depth: void → surface → border. Purple primary with restrained gold. */
 @theme {
-  --color-divine-bg-0: #0b0a0f;
-  --color-divine-bg-1: #111016;
-  --color-divine-bg-2: #1a1722;
-  --color-divine-border: #25222f;
-  --color-divine-text: #cacdd9;
-  --color-divine-muted: #828699;
+  /* Surfaces */
+  --color-divine-void: #0b0a0f;
+  --color-divine-surface: #15141c;
+  --color-divine-elevated: #1c1c1c;
+  --color-divine-border: #363242;
+  --color-divine-popover: #111016;
+
+  /* Brand */
   --color-divine-primary: #783cb5;
   --color-divine-primary-light: #c084fc;
-  --color-divine-accent-gold: #ecb96a;
+  --color-divine-primary-lilac: #b472ff;
+  --color-divine-secondary: #ecb96a;
+
+  /* Text */
+  --color-divine-text: #e4e4e7;
+  --color-divine-text-muted: #8b8d98;
+
+  /* Status */
+  --color-divine-success: #22c55e;
+  --color-divine-error: #ef4444;
+  --color-divine-warning: #facc15;
+  --color-divine-info: #5865f2;
+
+  /* Fonts */
+  --font-hero: var(--font-manrope), system-ui, sans-serif;
+  --font-section: var(--font-poppins), system-ui, sans-serif;
+  --font-ui: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Radii */
+  --radius-divine-md: 6px;
+  --radius-divine-lg: 8px;
+  --radius-divine-xl: 12px;
 }
 
 @theme inline {
@@ -54,60 +78,61 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  color-scheme: dark;
+  --background: #0b0a0f;
+  --foreground: #e4e4e7;
+  --card: #15141c;
+  --card-foreground: #e4e4e7;
+  --popover: #111016;
+  --popover-foreground: #e4e4e7;
+  --primary: #783cb5;
+  --primary-foreground: #ffffff;
+  --secondary: #15141c;
+  --secondary-foreground: #e4e4e7;
+  --muted: #15141c;
+  --muted-foreground: #8b8d98;
+  --accent: #ecb96a;
+  --accent-foreground: #0b0a0f;
+  --destructive: #ef4444;
+  --border: #363242;
+  --input: #363242;
+  --ring: #c084fc;
+  --sidebar: #0b0a0f;
+  --sidebar-foreground: #e4e4e7;
+  --sidebar-primary: #c084fc;
+  --sidebar-primary-foreground: #0b0a0f;
+  --sidebar-accent: #15141c;
+  --sidebar-accent-foreground: #e4e4e7;
+  --sidebar-border: #363242;
+  --sidebar-ring: #c084fc;
 }
 
 .dark {
   --background: #0b0a0f;
-  --foreground: #cacdd9;
-  --card: #111016;
-  --card-foreground: #cacdd9;
+  --foreground: #e4e4e7;
+  --card: #15141c;
+  --card-foreground: #e4e4e7;
   --popover: #111016;
-  --popover-foreground: #cacdd9;
+  --popover-foreground: #e4e4e7;
   --primary: #783cb5;
   --primary-foreground: #ffffff;
-  --secondary: #1a1722;
-  --secondary-foreground: #cacdd9;
-  --muted: #1a1722;
-  --muted-foreground: #828699;
-  --accent: #c084fc;
+  --secondary: #15141c;
+  --secondary-foreground: #e4e4e7;
+  --muted: #15141c;
+  --muted-foreground: #8b8d98;
+  --accent: #ecb96a;
   --accent-foreground: #0b0a0f;
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: #25222f;
-  --input: #25222f;
+  --destructive: #ef4444;
+  --border: #363242;
+  --input: #363242;
   --ring: #c084fc;
   --sidebar: #0b0a0f;
-  --sidebar-foreground: #cacdd9;
+  --sidebar-foreground: #e4e4e7;
   --sidebar-primary: #c084fc;
   --sidebar-primary-foreground: #0b0a0f;
-  --sidebar-accent: #1a1722;
-  --sidebar-accent-foreground: #cacdd9;
-  --sidebar-border: #25222f;
+  --sidebar-accent: #15141c;
+  --sidebar-accent-foreground: #e4e4e7;
+  --sidebar-border: #363242;
   --sidebar-ring: #c084fc;
 }
 
@@ -115,9 +140,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    color-scheme: dark;
+  }
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv11";
+    font-family: var(--font-ui);
   }
   a,
   button {
@@ -125,7 +154,56 @@
   }
 }
 
-/* Divine glow utility — applied on hover over primary interactive elements. */
+/* Divine glow — applied to primary interactive elements at rest. */
 @utility divine-glow {
-  box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+  box-shadow: 0 0 54px -7px #783cb5;
+}
+
+/* Divine glow on hover — the four-stack purple bloom from prod's .shadow__bttn. */
+@utility divine-glow-hover {
+  box-shadow:
+    0 0 5px #783cb5,
+    0 0 25px #783cb5,
+    0 0 25px #783cb5,
+    0 0 100px #783cb5;
+}
+
+/* Card hover lift — soft purple wash under elevated cards. */
+@utility divine-card-hover {
+  box-shadow: 0 8px 25px rgba(120, 60, 181, 0.15);
+}
+
+/* Gradient text — purple-light → primary, used on brand words and hero accents. */
+@utility divine-gradient-text {
+  background: linear-gradient(90deg, #c084fc 0%, #783cb5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient HR — gold → purple, the signature divider. */
+@utility divine-hr {
+  height: 1px;
+  background: linear-gradient(90deg, #ecb96a 0%, #783cb5 100%);
+  border: 0;
+}
+
+/* Premium card border — gold-to-purple hairline via masked pseudo-element. */
+@utility divine-card-gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+.divine-card-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, #ecb96a 0%, #c084fc 40%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
