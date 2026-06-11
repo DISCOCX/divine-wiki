@@ -4,25 +4,16 @@ import { Node, Root } from "fumadocs-core/page-tree";
 import { DocsLayoutProps } from "fumadocs-ui/layouts/docs";
 import * as path from "path";
 
-export function localizePageTree(
-  tree: DocsLayoutProps["tree"],
+/**
+ * Returns a function resolving `{meta.x.title}`-style placeholders against
+ * messages/<lang>.json, falling back to English, then to the raw text.
+ * Shared by the page tree localization below and the search index build
+ * (src/app/api/search/[locale]/route.ts), so sidebar names and search
+ * result breadcrumbs always resolve the same way.
+ */
+export function createPlaceholderTranslator(
   lang: string,
-  options?: {
-    translateName?: boolean;
-    translateTitle?: boolean;
-    translateIndex?: boolean;
-    translateChildren?: boolean;
-  },
-): DocsLayoutProps["tree"] {
-  if (!tree) return tree;
-
-  const {
-    translateName = true,
-    translateTitle = true,
-    translateIndex = true,
-    translateChildren = true,
-  } = options ?? {};
-
+): (text: string) => string {
   let translations: Record<string, any> = FallbackLanguage;
 
   if (lang !== "en") {
@@ -56,7 +47,7 @@ export function localizePageTree(
     return translated;
   }
 
-  function translateString(text: string): string {
+  return function translateString(text: string): string {
     if (!text || typeof text !== "string") return text;
 
     const match = text.match(/^\{(.+)\}$/);
@@ -73,7 +64,29 @@ export function localizePageTree(
     }
 
     return text;
-  }
+  };
+}
+
+export function localizePageTree(
+  tree: DocsLayoutProps["tree"],
+  lang: string,
+  options?: {
+    translateName?: boolean;
+    translateTitle?: boolean;
+    translateIndex?: boolean;
+    translateChildren?: boolean;
+  },
+): DocsLayoutProps["tree"] {
+  if (!tree) return tree;
+
+  const {
+    translateName = true,
+    translateTitle = true,
+    translateIndex = true,
+    translateChildren = true,
+  } = options ?? {};
+
+  const translateString = createPlaceholderTranslator(lang);
 
   function traverseNode<TraversableNode extends Node | Node[] | Root>(
     node: TraversableNode,
