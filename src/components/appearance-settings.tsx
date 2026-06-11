@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "fumadocs-ui/components/ui/popover";
-import { SettingsIcon } from "lucide-react";
+import { SettingsIcon, ChevronDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -52,8 +52,10 @@ const FONT_OPTIONS: { id: FontId; label: string; family: string }[] = [
   { id: "geist", label: "Geist", family: "var(--font-geist), sans-serif" },
   { id: "lora", label: "Lora", family: "var(--font-lora), serif" },
   {
+    // Shortened from "Atkinson Hyperlegible": the native <select> sizes to
+    // its widest option, so the full name bloated the whole control.
     id: "atkinson",
-    label: "Atkinson Hyperlegible",
+    label: "Atkinson",
     family: "var(--font-atkinson), sans-serif",
   },
   { id: "system", label: "", family: "system-ui, sans-serif" },
@@ -204,32 +206,6 @@ export function AppearanceSettings({ labels }: { labels: SettingsLabels }) {
             ]}
           />
         </Row>
-        <Row label={labels.font}>
-          {/* Native select keeps the row compact and dependency-free.
-              The trigger previews the current font via fontFamily; the
-              per-option fontFamily styles the open list where the
-              browser supports it (desktop Chrome/Firefox). */}
-          <select
-            aria-label={labels.font}
-            value={font}
-            onChange={(event) => applyFont(event.target.value as FontId)}
-            style={{
-              fontFamily: FONT_OPTIONS.find((option) => option.id === font)
-                ?.family,
-            }}
-            className="text-fd-foreground bg-fd-popover max-w-44 rounded-full border px-3 py-1.5 text-xs"
-          >
-            {FONT_OPTIONS.map((option) => (
-              <option
-                key={option.id}
-                value={option.id}
-                style={{ fontFamily: option.family }}
-              >
-                {option.label || labels.fontSystem}
-              </option>
-            ))}
-          </select>
-        </Row>
         <Row label={labels.width}>
           <Segmented
             groupLabel={labels.width}
@@ -240,6 +216,43 @@ export function AppearanceSettings({ labels }: { labels: SettingsLabels }) {
               { value: "centered", label: labels.widthCentered },
             ]}
           />
+        </Row>
+        {/* Font sits last: it's the only non-segmented control, so a
+            dropdown reads more naturally at the bottom of the stack than
+            wedged between the pill rows. */}
+        <Row label={labels.font}>
+          {/* Native select keeps the row dependency-free. `appearance-none`
+              plus our own chevron gives a consistent trigger across OSes;
+              the control sizes to its content (right-aligned by the Row)
+              instead of stretching. The trigger previews the current font
+              via fontFamily; per-option fontFamily styles the open list
+              where the browser supports it (desktop Chrome/Firefox). */}
+          <div className="relative inline-flex items-center">
+            <select
+              aria-label={labels.font}
+              value={font}
+              onChange={(event) => applyFont(event.target.value as FontId)}
+              style={{
+                fontFamily: FONT_OPTIONS.find((option) => option.id === font)
+                  ?.family,
+              }}
+              className="text-fd-foreground bg-fd-popover appearance-none rounded-full border py-1.5 pr-7 pl-3 text-xs"
+            >
+              {FONT_OPTIONS.map((option) => (
+                <option
+                  key={option.id}
+                  value={option.id}
+                  style={{ fontFamily: option.family }}
+                >
+                  {option.label || labels.fontSystem}
+                </option>
+              ))}
+            </select>
+            <ChevronDownIcon
+              className="text-fd-muted-foreground pointer-events-none absolute right-2.5 size-3.5"
+              aria-hidden
+            />
+          </div>
         </Row>
       </PopoverContent>
     </Popover>
